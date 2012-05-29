@@ -21,10 +21,11 @@ package com.alta189.cyborg.rest;
 import com.alta189.cyborg.api.plugin.CommonPlugin;
 import com.alta189.cyborg.api.util.yaml.YAMLFormat;
 import com.alta189.cyborg.api.util.yaml.YAMLProcessor;
-import com.alta189.cyborg.rest.core.CommandInfo;
+import com.alta189.cyborg.rest.core.Command;
 import com.alta189.cyborg.rest.core.CommandProvider;
 import com.alta189.cyborg.rest.core.CyborgInfo;
 import com.alta189.cyborg.rest.core.CyborgProvider;
+import com.alta189.cyborg.rest.factoids.Factoid;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.media.json.JsonJaxbModule;
@@ -76,8 +77,13 @@ public class CyborgREST extends CommonPlugin {
 	}
 
 	public ResourceConfig buildResourceConfig() {
-		ResourceConfig resourceConfig = new ResourceConfig(CyborgProvider.class, CyborgInfo.class, CommandInfo.class, CommandProvider.class)
-				.addModules(new JsonJaxbModule());
+		ResourceConfig resourceConfig = new ResourceConfig().addModules(new JsonJaxbModule());
+		resourceConfig.addClasses(CyborgProvider.class, CyborgInfo.class, Command.class, CommandProvider.class);
+
+		if (getCyborg().getPluginManager().getPlugin("CyborgFactoids") != null) {
+			resourceConfig.addClasses(Factoid.class, Factoid.class);
+		}
+
 		return resourceConfig;
 	}
 

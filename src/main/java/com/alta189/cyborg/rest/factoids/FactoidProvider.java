@@ -16,29 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.alta189.cyborg.rest.core;
-
-import com.alta189.cyborg.Cyborg;
+package com.alta189.cyborg.rest.factoids;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Path("/commands")
-public class CommandProvider {
+import static com.alta189.cyborg.factoids.FactoidManager.getDatabase;
+
+@Path("/factoids")
+public class FactoidProvider {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Command> getCommands() {
-		List<Command> result = new ArrayList<Command>();
-		for (com.alta189.cyborg.api.command.Command command : Cyborg.getInstance().getCommandManager().getCommandMap().getCommands()) {
-			if (!command.isHiddenFromList())
-				result.add(new Command(command));
+	public List<Factoid> getFactoids() {
+		List<Factoid> result = new ArrayList<Factoid>();
+		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).execute().find()) {
+			result.add(new Factoid(factoid));
 		}
 		return result;
 	}
-
 }

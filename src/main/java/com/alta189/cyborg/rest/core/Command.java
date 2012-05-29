@@ -18,25 +18,23 @@
  */
 package com.alta189.cyborg.rest.core;
 
-import com.alta189.cyborg.api.command.Command;
-
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 @XmlRootElement
-public class CommandInfo {
+public class Command {
 
 	private String command;
 	private List<String> aliases = new ArrayList<String>();
 	private String description;
 	private String usage;
 
-	public CommandInfo() {
+	public Command() {
 
 	}
 
-	public CommandInfo(Command command) {
+	public Command(com.alta189.cyborg.api.command.Command command) {
 		this.command = command.getCommand();
 		this.aliases = command.getAliases();
 		this.description = command.getDesc();

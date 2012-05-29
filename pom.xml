@@ -23,6 +23,13 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.alta189.cyborg</groupId>
+			<artifactId>factoids</artifactId>
+			<version>1.0.0</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -59,34 +66,6 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			<!-- JAR dependency addition plugin -->
-			<!--<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>1.5</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<artifactSet>
-								&lt;!&ndash;<includes>
-									<include>org.glassfish.*</include>
-									<include>com.sun.xml.bind:jaxb-impl</include>
-									<include>javax.*</include>
-									<include>org.codehaus.*</include>
-									<include>com.googlecode.*</include>
-								</includes>&ndash;&gt;
-								<excludes>
-									<exclude>com.alta189:cyborg</exclude>
-								</excludes>
-							</artifactSet>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>-->
 		</plugins>
 	</build>
     
