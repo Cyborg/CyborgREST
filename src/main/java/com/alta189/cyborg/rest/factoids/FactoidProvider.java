@@ -52,4 +52,37 @@ public class FactoidProvider {
 		}
 		return result;
 	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/global")
+	public List<Factoid> getGlobalFactoids() {
+		List<Factoid> result = new ArrayList<Factoid>();
+		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().equal("location", "global").execute().find()) {
+			result.add(new Factoid(factoid));
+		}
+		return result;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/local")
+	public List<Factoid> getLocalFactoids() {
+		List<Factoid> result = new ArrayList<Factoid>();
+		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().notEqual("location", "global").execute().find()) {
+			result.add(new Factoid(factoid));
+		}
+		return result;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/location/{search}")
+	public List<Factoid> searchByLocation(@PathParam("search") String location) {
+		List<Factoid> result = new ArrayList<Factoid>();
+		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().equal("location", location).execute().find()) {
+			result.add(new Factoid(factoid));
+		}
+		return result;
+	}
 }
