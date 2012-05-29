@@ -18,49 +18,27 @@
  */
 package com.alta189.cyborg.rest.core;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
+import com.alta189.cyborg.Cyborg;
+import com.alta189.cyborg.api.command.Command;
 
-@XmlRootElement
-public class CyborgInfo {
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
 
-	private String nick;
+@Path("commands")
+public class CommandProvider {
 
-	private String ident;
-
-	private String hostmask;
-
-	private Set<String> channels;
-
-	public String getNick() {
-		return nick;
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<CommandInfo> getCommands() {
+		List<CommandInfo> result = new ArrayList<CommandInfo>();
+		for (Command command : Cyborg.getInstance().getCommandManager().getCommandMap().getCommands()) {
+			result.add(new CommandInfo(command));
+		}
+		return result;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-
-	public String getIdent() {
-		return ident;
-	}
-
-	public void setIdent(String ident) {
-		this.ident = ident;
-	}
-
-	public String getHostmask() {
-		return hostmask;
-	}
-
-	public void setHostmask(String hostmask) {
-		this.hostmask = hostmask;
-	}
-
-	public Set<String> getChannels() {
-		return channels;
-	}
-
-	public void setChannels(Set<String> channels) {
-		this.channels = channels;
-	}
 }

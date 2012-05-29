@@ -34,7 +34,7 @@ public class CyborgProvider {
 		Cyborg cyborg = Cyborg.getInstance();
 		CyborgInfo info = new CyborgInfo();
 		info.setNick(cyborg.getNick());
-		info.setIndent(cyborg.getIndent());
+		info.setIdent(cyborg.getIndent());
 		info.setHostmask(cyborg.getHostmask());
 		info.setChannels(cyborg.getChannelNames());
 		return info;
