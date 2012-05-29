@@ -36,7 +36,8 @@ public class CommandProvider {
 	public List<CommandInfo> getCommands() {
 		List<CommandInfo> result = new ArrayList<CommandInfo>();
 		for (Command command : Cyborg.getInstance().getCommandManager().getCommandMap().getCommands()) {
-			result.add(new CommandInfo(command));
+			if (!command.isHiddenFromList())
+				result.add(new CommandInfo(command));
 		}
 		return result;
 	}

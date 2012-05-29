@@ -30,7 +30,6 @@ public class CommandInfo {
 	private String command;
 	private List<String> aliases = new ArrayList<String>();
 	private String description;
-	private boolean hiddenFromList;
 	private String usage;
 
 	public CommandInfo() {
@@ -42,7 +41,6 @@ public class CommandInfo {
 		this.aliases = command.getAliases();
 		this.description = command.getDesc();
 		this.usage = command.getUsage();
-		this.hiddenFromList = command.isHiddenFromList();
 	}
 
 	public String getCommand() {
@@ -67,14 +65,6 @@ public class CommandInfo {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public boolean isHiddenFromList() {
-		return hiddenFromList;
-	}
-
-	public void setHiddenFromList(boolean hiddenFromList) {
-		this.hiddenFromList = hiddenFromList;
 	}
 
 	public String getUsage() {
