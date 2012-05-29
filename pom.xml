@@ -70,7 +70,7 @@
 				</includes>
 			</resource>
 			<resource>
-				<targetPath>com/alta189/cyborg/factoids</targetPath>
+				<targetPath>com/alta189/cyborg/rest</targetPath>
 				<filtering>false</filtering>
 				<directory>${basedir}/src/main/resources</directory>
 				<includes>
