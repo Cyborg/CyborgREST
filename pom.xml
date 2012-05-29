@@ -23,37 +23,6 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.alta189.cyborg</groupId>
-			<artifactId>perms</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-common</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-grizzly2-http</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-json</artifactId>
-			<version>2.0-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -91,7 +60,7 @@
 				</configuration>
 			</plugin>
 			<!-- JAR dependency addition plugin -->
-			<plugin>
+			<!--<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>1.5</version>
@@ -103,17 +72,21 @@
 						</goals>
 						<configuration>
 							<artifactSet>
-								<includes>
+								&lt;!&ndash;<includes>
 									<include>org.glassfish.*</include>
 									<include>com.sun.xml.bind:jaxb-impl</include>
 									<include>javax.*</include>
 									<include>org.codehaus.*</include>
-								</includes>
+									<include>com.googlecode.*</include>
+								</includes>&ndash;&gt;
+								<excludes>
+									<exclude>com.alta189:cyborg</exclude>
+								</excludes>
 							</artifactSet>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 		</plugins>
 	</build>
     

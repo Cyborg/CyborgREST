@@ -30,7 +30,7 @@ public class CyborgProvider {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public CyborgInfo getCyborg() {
+	public CyborgInfo getCyborgInfo() {
 		Cyborg cyborg = Cyborg.getInstance();
 		CyborgInfo info = new CyborgInfo();
 		info.setNick(cyborg.getNick());
