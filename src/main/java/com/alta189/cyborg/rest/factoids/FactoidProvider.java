@@ -20,6 +20,7 @@ package com.alta189.cyborg.rest.factoids;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -36,6 +37,17 @@ public class FactoidProvider {
 	public List<Factoid> getFactoids() {
 		List<Factoid> result = new ArrayList<Factoid>();
 		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).execute().find()) {
+			result.add(new Factoid(factoid));
+		}
+		return result;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/range/{min}/{max}")
+	public List<Factoid> getFactoids(@PathParam("min") int min, @PathParam("min") int max) {
+		List<Factoid> result = new ArrayList<Factoid>();
+		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().greaterThanOrEqual("id", min).and().lessThanOrEqual("id", max).execute().find()) {
 			result.add(new Factoid(factoid));
 		}
 		return result;
