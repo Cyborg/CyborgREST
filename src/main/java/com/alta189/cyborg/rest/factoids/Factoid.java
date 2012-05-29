@@ -18,6 +18,9 @@
  */
 package com.alta189.cyborg.rest.factoids;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Factoid {
 	private int id;
 	private String name;
