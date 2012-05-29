@@ -45,7 +45,7 @@ public class FactoidProvider {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/range/{min}/{max}")
-	public List<Factoid> getFactoids(@PathParam("min") int min, @PathParam("mex") int max) {
+	public List<Factoid> getFactoids(@PathParam("min") int min, @PathParam("max") int max) {
 		List<Factoid> result = new ArrayList<Factoid>();
 		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().greaterThanOrEqual("id", min).and().lessThanOrEqual("id", max).execute().find()) {
 			result.add(new Factoid(factoid));
