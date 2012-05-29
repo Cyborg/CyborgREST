@@ -21,6 +21,8 @@ package com.alta189.cyborg.rest;
 import com.alta189.cyborg.api.plugin.CommonPlugin;
 import com.alta189.cyborg.api.util.yaml.YAMLFormat;
 import com.alta189.cyborg.api.util.yaml.YAMLProcessor;
+import com.alta189.cyborg.rest.core.CommandInfo;
+import com.alta189.cyborg.rest.core.CommandProvider;
 import com.alta189.cyborg.rest.core.CyborgInfo;
 import com.alta189.cyborg.rest.core.CyborgProvider;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -74,7 +76,7 @@ public class CyborgREST extends CommonPlugin {
 	}
 
 	public ResourceConfig buildResourceConfig() {
-		ResourceConfig resourceConfig = new ResourceConfig(CyborgProvider.class, CyborgInfo.class)
+		ResourceConfig resourceConfig = new ResourceConfig(CyborgProvider.class, CyborgInfo.class, CommandInfo.class, CommandProvider.class)
 				.addModules(new JsonJaxbModule());
 		return resourceConfig;
 	}
