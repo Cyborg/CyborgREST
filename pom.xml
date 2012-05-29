@@ -103,10 +103,12 @@
 						</goals>
 						<configuration>
 							<artifactSet>
-								<excludes>
-									<exclude>com.alta189:cyborg</exclude>
-									<exclude>com.alta189.cyborg:*</exclude>
-								</excludes>
+								<includes>
+									<include>org.glassfish.*</include>
+									<include>com.sun.xml.bind:jaxb-impl</include>
+									<include>javax.*</include>
+									<include>org.codehaus.*</include>
+								</includes>
 							</artifactSet>
 						</configuration>
 					</execution>
