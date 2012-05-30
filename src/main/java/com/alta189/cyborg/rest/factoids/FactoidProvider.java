@@ -155,11 +155,11 @@ public class FactoidProvider {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/handler/{search}/count")
-	public List<Factoid> searchByHandlerCount(@PathParam("count") String handler) {
+	public String searchByHandlerCount(@PathParam("search") String handler) {
 		List<Factoid> result = new ArrayList<Factoid>();
 		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().equal("handler", handler.toLowerCase()).execute().find()) {
 			result.add(new Factoid(factoid));
 		}
-		return result;
+		return getCountJSON(result.size());
 	}
 }
