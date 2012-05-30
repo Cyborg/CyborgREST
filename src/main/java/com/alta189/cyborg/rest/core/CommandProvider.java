@@ -27,6 +27,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.alta189.cyborg.rest.JSONUtil.getCountJSON;
+
 @Path("/commands")
 public class CommandProvider {
 
@@ -39,6 +41,13 @@ public class CommandProvider {
 				result.add(new Command(command));
 		}
 		return result;
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/count")
+	public String getCommandCount() {
+		return (getCountJSON(getCommands().size()));
 	}
 
 }
