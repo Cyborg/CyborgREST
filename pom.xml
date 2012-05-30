@@ -11,8 +11,7 @@
 
 	<properties>
 		<main.class>com.alta189.cyborg.rest.CyborgREST</main.class>
-		<depends></depends>
-		<softDepends>CyborgFactoids</softDepends>
+		<depends>CyborgFactoids</depends>
 	</properties>
 
 	<dependencies>
