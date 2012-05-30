@@ -19,7 +19,6 @@
 package com.alta189.cyborg.rest.factoids;
 
 import com.alta189.cyborg.factoids.FactoidManager;
-import com.alta189.cyborg.factoids.handlers.Handler;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -47,24 +46,27 @@ public class FactoidProvider {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/count")
+	public String getFactoidsCount() {
+		return getCountJSON(getFactoids().size());
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/handlers")
-	public List<String> getHandlers() {
-		List<String> result = new ArrayList<String>();
-		for (Handler handler : FactoidManager.getHandlers()) {
-			result.add(handler.getName());
+	public List<Handler> getHandlers() {
+		List<Handler> result = new ArrayList<Handler>();
+		for (com.alta189.cyborg.factoids.handlers.Handler handler :FactoidManager.getHandlers()) {
+			result.add(new Handler(handler));
 		}
 		return result;
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/count")
-	public String getFactoidsCount() {
-		List<Factoid> result = new ArrayList<Factoid>();
-		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).execute().find()) {
-			result.add(new Factoid(factoid));
-		}
-		return getCountJSON(result.size());
+	@Path("/handlers/count")
+	public String getHandlersCount() {
+		return getCountJSON(getHandlers().size());
 	}
 
 	@GET
@@ -82,11 +84,7 @@ public class FactoidProvider {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/range/{min}/{max}/count")
 	public String getFactoidsCount(@PathParam("min") int min, @PathParam("max") int max) {
-		List<Factoid> result = new ArrayList<Factoid>();
-		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().greaterThanOrEqual("id", min).and().lessThanOrEqual("id", max).execute().find()) {
-			result.add(new Factoid(factoid));
-		}
-		return getCountJSON(result.size());
+		return getCountJSON(getFactoids(min, max).size());
 	}
 
 	@GET
@@ -104,11 +102,7 @@ public class FactoidProvider {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/global/count")
 	public String getGlobalFactoidsCount() {
-		List<Factoid> result = new ArrayList<Factoid>();
-		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().equal("location", "global").execute().find()) {
-			result.add(new Factoid(factoid));
-		}
-		return getCountJSON(result.size());
+		return getCountJSON(getGlobalFactoids().size());
 	}
 
 	@GET
@@ -126,11 +120,7 @@ public class FactoidProvider {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/local/count")
 	public String getLocalFactoidsCount() {
-		List<Factoid> result = new ArrayList<Factoid>();
-		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().notEqual("location", "global").execute().find()) {
-			result.add(new Factoid(factoid));
-		}
-		return getCountJSON(result.size());
+		return getCountJSON(getLocalFactoids().size());
 	}
 
 	@GET
@@ -148,11 +138,7 @@ public class FactoidProvider {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/location/{search}/count")
 	public String searchByLocationCount(@PathParam("search") String location) {
-		List<Factoid> result = new ArrayList<Factoid>();
-		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().equal("location", location.toLowerCase()).execute().find()) {
-			result.add(new Factoid(factoid));
-		}
-		return getCountJSON(result.size());
+		return getCountJSON(searchByLocation(location).size());
 	}
 
 	@GET
@@ -170,10 +156,6 @@ public class FactoidProvider {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/handler/{search}/count")
 	public String searchByHandlerCount(@PathParam("search") String handler) {
-		List<Factoid> result = new ArrayList<Factoid>();
-		for (com.alta189.cyborg.factoids.Factoid factoid : getDatabase().select(com.alta189.cyborg.factoids.Factoid.class).where().equal("handler", handler.toLowerCase()).execute().find()) {
-			result.add(new Factoid(factoid));
-		}
-		return getCountJSON(result.size());
+		return getCountJSON(searchByHandler(handler).size());
 	}
 }
