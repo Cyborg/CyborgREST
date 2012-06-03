@@ -44,6 +44,7 @@ public class CyborgREST extends CommonPlugin {
 	private YAMLProcessor config;
 	private HttpServer server;
 	private URI baseUri;
+	private GarbageManThread garbageMan;
 
 	@Override
 	public void onEnable() {
@@ -53,6 +54,14 @@ public class CyborgREST extends CommonPlugin {
 		baseUri = URI.create(getConfig().getString("base-url", "http://localhost:8080/rest/"));
 
 		server = GrizzlyHttpServerFactory.createHttpServer(baseUri, buildResourceConfig());
+
+		if (getConfig().getBoolean("gc-thread", true)) {
+			Object obj = getConfig().getProperty("gc-wait");
+			long wait = obj instanceof Number ? ((Number) obj).longValue() : 10000;
+			garbageMan = new GarbageManThread(wait);
+			garbageMan.start();
+		}
+
 		try {
 			server.start();
 		} catch (IOException e) {
@@ -65,6 +74,13 @@ public class CyborgREST extends CommonPlugin {
 	@Override
 	public void onDisable() {
 		getLogger().log(Level.INFO, "Disabling...");
+
+		if (garbageMan != null) {
+			try {
+				garbageMan.interrupt();
+			} catch (Exception ignored){
+			}
+		}
 
 		if (server != null) {
 			server.stop();
