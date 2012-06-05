@@ -45,11 +45,14 @@ public class CyborgREST extends CommonPlugin {
 	private HttpServer server;
 	private URI baseUri;
 	private GarbageManThread garbageMan;
+	private boolean debug;
 
 	@Override
 	public void onEnable() {
 		instance = this;
 		getLogger().log(Level.INFO, "Enabling...");
+
+		debug = getConfig().getBoolean("debug", false);
 
 		baseUri = URI.create(getConfig().getString("base-url", "http://localhost:8080/rest/"));
 
@@ -57,8 +60,10 @@ public class CyborgREST extends CommonPlugin {
 
 		if (getConfig().getBoolean("gc-thread", true)) {
 			Object obj = getConfig().getProperty("gc-wait");
-			long wait = obj instanceof Number ? ((Number) obj).longValue() : 10000;
-			System.out.println("Starting the GarbageManThread with a wait of " + wait);
+			long wait = obj instanceof Number ? ((Number) obj).longValue() : 600000;
+			if (debug) {
+				System.out.println("Starting the GarbageManThread with a wait of " + wait);
+			}
 			garbageMan = new GarbageManThread(wait);
 			garbageMan.start();
 		}
@@ -119,6 +124,10 @@ public class CyborgREST extends CommonPlugin {
 			}
 		}
 		return instance.config;
+	}
+
+	public static synchronized boolean isDebug() {
+		return instance.debug;
 	}
 
 	private YAMLProcessor setupConfig(File file) {

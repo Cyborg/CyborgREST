@@ -1,3 +1,4 @@
 base-url: http://localhost:8080/rest/
 gc-thread: true
 gc-wait: 10000
+debug: false

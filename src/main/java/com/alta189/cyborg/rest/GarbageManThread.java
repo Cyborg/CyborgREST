@@ -32,7 +32,9 @@ public class GarbageManThread extends Thread {
 				Thread.sleep(waitTime);
 			} catch (InterruptedException ignored) {
 			}
-			System.out.println("Garbage man is collecting the trash");
+			if (CyborgREST.isDebug()) {
+				System.out.println("Garbage man is collecting the trash");
+			}
 			System.gc();
 		}
 	}
