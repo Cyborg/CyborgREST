@@ -25,6 +25,7 @@ import com.alta189.cyborg.rest.core.Command;
 import com.alta189.cyborg.rest.core.CommandProvider;
 import com.alta189.cyborg.rest.core.CyborgInfo;
 import com.alta189.cyborg.rest.core.CyborgProvider;
+import com.alta189.cyborg.rest.core.StatusProvider;
 import com.alta189.cyborg.rest.factoids.Factoid;
 import com.alta189.cyborg.rest.factoids.FactoidProvider;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -101,7 +102,7 @@ public class CyborgREST extends CommonPlugin {
 
 	public ResourceConfig buildResourceConfig() {
 		ResourceConfig resourceConfig = new ResourceConfig().addModules(new JsonJaxbModule());
-		resourceConfig.addClasses(CyborgProvider.class, CyborgInfo.class, Command.class, CommandProvider.class);
+		resourceConfig.addClasses(StatusProvider.class, CyborgProvider.class, CyborgInfo.class, Command.class, CommandProvider.class);
 
 		if (getCyborg().getPluginManager().getPlugin("CyborgFactoids") != null) {
 			resourceConfig.addClasses(Factoid.class, FactoidProvider.class);
