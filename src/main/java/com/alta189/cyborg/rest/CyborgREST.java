@@ -58,6 +58,7 @@ public class CyborgREST extends CommonPlugin {
 		if (getConfig().getBoolean("gc-thread", true)) {
 			Object obj = getConfig().getProperty("gc-wait");
 			long wait = obj instanceof Number ? ((Number) obj).longValue() : 10000;
+			System.out.println("Starting the GarbageManThread with a wait of " + wait);
 			garbageMan = new GarbageManThread(wait);
 			garbageMan.start();
 		}
