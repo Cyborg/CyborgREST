@@ -19,11 +19,14 @@
 package com.alta189.cyborg.rest.core;
 
 import com.alta189.cyborg.Cyborg;
+import org.pircbotx.Channel;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.HashSet;
+import java.util.Set;
 
 @Path("/cyborg")
 public class CyborgProvider {
@@ -36,7 +39,14 @@ public class CyborgProvider {
 		info.setNick(cyborg.getNick());
 		info.setIdent(cyborg.getIndent());
 		info.setHostmask(cyborg.getHostmask());
-		info.setChannels(cyborg.getChannelNames());
+		Set<String> channels = new HashSet<String>();
+		for (Channel channel : cyborg.getChannels()) {
+			if (!channel.getMode().contains("p") && !channel.getMode().contains("s")) {
+				channels.add(channel.getName());
+			}
+		}
+
+		info.setChannels(channels);
 		return info;
 	}
 }
