@@ -27,9 +27,9 @@ import javax.ws.rs.core.MediaType;
 public class StatusProvider {
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String getStatus() {
-		return "Running!";
+		return "OK";
 	}
 
 }
