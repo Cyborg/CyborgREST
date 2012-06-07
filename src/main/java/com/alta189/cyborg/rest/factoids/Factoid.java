@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Factoid {
-	private int id;
+	private long id;
 	private String name;
 	private String location;
 	private String handler;
@@ -52,7 +52,7 @@ public class Factoid {
 		timestamp = factoid.getTimestamp();
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
