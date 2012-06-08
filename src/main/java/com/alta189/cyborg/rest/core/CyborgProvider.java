@@ -45,6 +45,7 @@ public class CyborgProvider {
 			}
 		}
 		info.setChannels(channels);
+		info.setRunningTime(cyborg.getRunningTime());
 		return info;
 	}
 }

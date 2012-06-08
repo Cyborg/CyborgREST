@@ -25,12 +25,10 @@ import java.util.Set;
 public class CyborgInfo {
 
 	private String nick;
-
 	private String ident;
-
 	private String hostmask;
-
 	private Set<Channel> channels;
+	private long runningTime;
 
 	public String getNick() {
 		return nick;
@@ -62,5 +60,13 @@ public class CyborgInfo {
 
 	public void setChannels(Set<Channel> channels) {
 		this.channels = channels;
+	}
+
+	public long getRunningTime() {
+		return runningTime;
+	}
+
+	public void setRunningTime(long runningTime) {
+		this.runningTime = runningTime;
 	}
 }
