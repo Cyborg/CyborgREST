@@ -18,49 +18,41 @@
  */
 package com.alta189.cyborg.rest.core;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
+public class Channel {
 
-@XmlRootElement
-public class CyborgInfo {
+	private String name;
+	private String modes;
+	private int users;
+	private String topic;
 
-	private String nick;
-
-	private String ident;
-
-	private String hostmask;
-
-	private Set<Channel> channels;
-
-	public String getNick() {
-		return nick;
+	public Channel(org.pircbotx.Channel channel) {
+		this.name = channel.getName();
+		this.modes = channel.getMode();
+		this.users = channel.getUsers().size();
+		this.topic = channel.getTopic();
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public String getName() {
+		return name;
 	}
 
-	public String getIdent() {
-		return ident;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setIdent(String ident) {
-		this.ident = ident;
+	public String getModes() {
+		return modes;
 	}
 
-	public String getHostmask() {
-		return hostmask;
+	public void setModes(String modes) {
+		this.modes = modes;
 	}
 
-	public void setHostmask(String hostmask) {
-		this.hostmask = hostmask;
+	public int getUsers() {
+		return users;
 	}
 
-	public Set<Channel> getChannels() {
-		return channels;
-	}
-
-	public void setChannels(Set<Channel> channels) {
-		this.channels = channels;
+	public void setUsers(int users) {
+		this.users = users;
 	}
 }
