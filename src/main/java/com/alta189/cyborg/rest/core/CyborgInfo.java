@@ -28,21 +28,20 @@ import java.util.Set;
 
 @XmlRootElement
 public class CyborgInfo {
-	private static final PeriodFormatter timeFormatter = new PeriodFormatterBuilder()
-			.appendYears().appendSuffix(" years").appendSeparator(", ")
-			.appendMonths().appendSuffix(" months").appendSeparator(", ")
-			.appendWeeks().appendSuffix(" weeks").appendSeparator(", ")
-			.appendDays().appendSuffix(" days").appendSeparator(", ")
-			.appendHours().appendSuffix(" hours").appendSeparator(", ")
-			.appendMinutes().appendSuffix(" minutes").appendSeparator(", ")
-			.appendSeconds().appendSuffix(" seconds")
-			.toFormatter();
 	private String nick;
 	private String ident;
 	private String hostmask;
 	private Set<Channel> channels;
 	private long runningTime;
 	private String runningTimeFormatted;
+
+	public String getRunningTimeFormatted() {
+		return runningTimeFormatted;
+	}
+
+	public void setRunningTimeFormatted(String runningTimeFormatted) {
+		this.runningTimeFormatted = runningTimeFormatted;
+	}
 
 	public String getNick() {
 		return nick;
@@ -82,9 +81,5 @@ public class CyborgInfo {
 
 	public void setRunningTime(long runningTime) {
 		this.runningTime = runningTime;
-		DateTime begin = new DateTime(System.currentTimeMillis());
-		DateTime end = new DateTime(runningTime);
-		Period period = new Period(end, begin);
-		this.runningTimeFormatted = timeFormatter.print(period);
 	}
 }

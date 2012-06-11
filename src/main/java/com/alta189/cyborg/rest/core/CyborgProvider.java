@@ -19,6 +19,10 @@
 package com.alta189.cyborg.rest.core;
 
 import com.alta189.cyborg.Cyborg;
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,6 +33,16 @@ import java.util.Set;
 
 @Path("/cyborg")
 public class CyborgProvider {
+
+	private static final PeriodFormatter timeFormatter = new PeriodFormatterBuilder()
+			.appendYears().appendSuffix(" years").appendSeparator(", ")
+			.appendMonths().appendSuffix(" months").appendSeparator(", ")
+			.appendWeeks().appendSuffix(" weeks").appendSeparator(", ")
+			.appendDays().appendSuffix(" days").appendSeparator(", ")
+			.appendHours().appendSuffix(" hours").appendSeparator(", ")
+			.appendMinutes().appendSuffix(" minutes").appendSeparator(", ")
+			.appendSeconds().appendSuffix(" seconds")
+			.toFormatter();
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -46,6 +60,9 @@ public class CyborgProvider {
 		}
 		info.setChannels(channels);
 		info.setRunningTime(cyborg.getRunningTime());
+		Period period = new Period(info.getRunningTime());
+		info.setRunningTimeFormatted(timeFormatter.print(period));
+
 		return info;
 	}
 }
