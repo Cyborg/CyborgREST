@@ -25,6 +25,9 @@ public class Channel {
 	private int users;
 	private String topic;
 
+	public Channel() {
+	}
+
 	public Channel(org.pircbotx.Channel channel) {
 		this.name = channel.getName();
 		this.modes = channel.getMode();
@@ -54,5 +57,13 @@ public class Channel {
 
 	public void setUsers(int users) {
 		this.users = users;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 }
