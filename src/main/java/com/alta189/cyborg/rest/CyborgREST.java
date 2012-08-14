@@ -30,7 +30,6 @@ import com.alta189.cyborg.rest.factoids.Factoid;
 import com.alta189.cyborg.rest.factoids.FactoidProvider;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
-import org.glassfish.jersey.media.json.JsonJaxbModule;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.File;
@@ -101,7 +100,7 @@ public class CyborgREST extends CommonPlugin {
 	}
 
 	public ResourceConfig buildResourceConfig() {
-		ResourceConfig resourceConfig = new ResourceConfig().addModules(new JsonJaxbModule());
+		ResourceConfig resourceConfig = new ResourceConfig();//.addModules(new JsonJaxbModule());
 		resourceConfig.addClasses(StatusProvider.class, CyborgProvider.class, CyborgInfo.class, Command.class, CommandProvider.class);
 
 		if (getCyborg().getPluginManager().getPlugin("CyborgFactoids") != null) {
